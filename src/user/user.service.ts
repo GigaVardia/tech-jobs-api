@@ -18,10 +18,6 @@ export class UserService {
   }
 
   async findOne(email: string): Promise<User | undefined> {
-    console.log(email);
-
-    console.log(await this.userModel.find());
-
     return this.userModel.findOne({ email });
   }
 }

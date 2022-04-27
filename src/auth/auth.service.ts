@@ -18,10 +18,18 @@ export class AuthService {
     if (user.password !== dto.password)
       throw new UnauthorizedException('Email or password is incorrect');
 
-    return user;
+    return this.signUser(user._id.toString(), user.email, 'user');
   }
 
   async signUpLocal(dto: SignUpDto) {
     //
+  }
+
+  signUser(userId: string, email: string, type: string) {
+    return this.jwtService.sign({
+      sub: userId,
+      email,
+      type,
+    });
   }
 }
